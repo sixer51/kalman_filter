@@ -1,0 +1,6 @@
+<launch>
+
+  <node pkg="kalman_filter" type="initial_pose.py" name="initial_pose" output="screen" />
+  <node pkg="kalman_filter" type="kalman_filter.py" name="kalman_filter" output="screen" />
+
+</launch>

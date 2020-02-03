@@ -1,0 +1,14 @@
+<launch>
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+    <remap from="image" to="depth_image" />
+    <remap from="camera_info" to="/camera/depth/camera_info" />
+    <remap from="scan" to="/camera_scan" />
+    <param name="scan_height" type="int" value="10" />
+    <param name="range_min" type="double" value="0.0" />
+    <param name="output_frame_id" type="str" value="/base_link" />
+  </node>
+
+  <node pkg="rosbag" type="play" name="rosbag" args="$(find kalman_filter)/bags/bag_2020-02-01-05-50-34.bag"/>
+
+  <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/camera/depth/image_raw raw out:=depth_image" />
+</launch>
